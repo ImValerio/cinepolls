@@ -16,7 +16,7 @@ const index = () => {
     ]);
     return (
         <div className="w-full md:w-10/12 ">
-            <h1 className="text-6xl font-bold">CinePolls</h1>
+            <h1 className="text-7xl font-bold ">CinePolls</h1>
 
             {polls.map((e, i) => {
                 return <Poll poll={e} key={i} />;
