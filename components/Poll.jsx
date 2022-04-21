@@ -1,24 +1,54 @@
-import React from "react";
+import { Grid, Button, Typography } from "@mui/material";
 
 const Poll = ({ poll }) => {
     return (
-        <div className="shadow-lg flex flex-col justify-center items-center w-fit p-4">
-            <div className="flex items-center m-3">
-                <h2 className="text-4xl">{poll.film1.title}</h2>
-                <h3 className="text-2xl">({poll.film1.votes})</h3>
-                <button className="border px-4 py-2 text-3xl font-semibold mx-3">
-                    VOTE
-                </button>
-            </div>
+        <Grid
+            container
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            marginY={5}
+        >
+            <Grid
+                container
+                direction="row"
+                alignItems="center"
+                justifyContent="center"
+                item
+                xs={6}
+            >
+                <Typography variant="h2" component="h2">
+                    {poll.film1.title}
+                </Typography>
+                <Typography variant="h6" component="h4">
+                    ({poll.film1.votes})
+                </Typography>
 
-            <div className="flex items-center m-3">
-                <h2 className="text-4xl">{poll.film2.title}</h2>
-                <h3 className="text-2xl">({poll.film2.votes})</h3>
-                <button className="border px-4 py-2 text-3xl font-semibold mx-3">
+                <Button variant="contained" size="large" sx={{ margin: 3 }}>
                     VOTE
-                </button>
-            </div>
-        </div>
+                </Button>
+            </Grid>
+
+            <Grid
+                container
+                direction="row"
+                alignItems="center"
+                justifyContent="center"
+                item
+                xs={6}
+            >
+                <Typography variant="h2" component="h2">
+                    {poll.film2.title}
+                </Typography>
+                <Typography variant="h6" component="h4">
+                    ({poll.film2.votes})
+                </Typography>
+
+                <Button variant="contained" size="large" sx={{ margin: 3 }}>
+                    VOTE
+                </Button>
+            </Grid>
+        </Grid>
     );
 };
 
