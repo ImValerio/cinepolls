@@ -1,0 +1,29 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Poll {
+  id    Int           @id @default(autoincrement())
+  films PollOnFilms[]
+}
+
+model Film {
+  id    Int           @id @default(autoincrement())
+  title String
+  votes Int
+  polls PollOnFilms[]
+}
+
+model PollOnFilms {
+  id   Int    @id @default(autoincrement())
+  Poll Poll[]
+  Film Film[]
+}
