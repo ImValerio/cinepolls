@@ -19,6 +19,8 @@ const index = ({ films }) => {
 };
 export const getServerSideProps = async ({ req }) => {
     const films = await prisma.film.findMany();
+    await prisma.$disconnect();
+
     return { props: { films } };
 };
 

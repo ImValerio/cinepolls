@@ -1,11 +1,26 @@
-import { Grid, TextField, Button } from "@mui/material";
+import { Grid, TextField, Input } from "@mui/material";
 import { useState } from "react";
 
 const create = () => {
     const [title, setTitle] = useState("");
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const res = await fetch("../api/film/create", {
+            method: "POST",
+            headers: {
+                "Content-type": "Application/json",
+            },
+
+            body: JSON.stringify({ title }),
+        });
+
+        if (res.ok) return alert("The movie has been added");
+    };
     return (
         <Grid container justifyContent={"center"} alignItems="center">
-            <form>
+            <form onSubmit={handleSubmit}>
                 <Grid
                     container
                     flexDirection={"column"}
@@ -19,9 +34,9 @@ const create = () => {
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                     />
-                    <Button variant="contained" fullWidth>
+                    <Input type="submit" variant="contained" fullWidth>
                         CONFIRM
-                    </Button>
+                    </Input>
                 </Grid>
             </form>
         </Grid>

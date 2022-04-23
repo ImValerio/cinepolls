@@ -4,12 +4,14 @@ const prisma = new PrismaClient();
 
 export default async (req, res) => {
     if (req.method == 'POST') {
-        const { title } = req.body;
+        const { id, title } = req.body;
 
-        const createdFilm = await prisma.film.create({
+        const createdFilm = await prisma.film.update({
+            where: {
+                id
+            },
             data: {
                 title,
-                votes: 0
             }
         })
         await prisma.$disconnect()
