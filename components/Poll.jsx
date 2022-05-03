@@ -31,7 +31,7 @@ const Poll = ({ poll }) => {
                 xs={6}
             >
                 <Typography
-                    variant={poll.film1.title.length > 8 ? "h3" : "h2"}
+                    variant={poll.film1.title.length > 8 ? "h4" : "h2"}
                     component="h2"
                     textAlign="center"
                     fontWeight={100}

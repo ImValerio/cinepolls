@@ -1,9 +1,6 @@
 import { Grid, Typography } from "@mui/material";
 import Poll from "../components/Poll";
-
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import prisma from "../lib/prisma";
 
 const index = ({ polls }) => {
     return (

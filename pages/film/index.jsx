@@ -1,8 +1,6 @@
 import React from "react";
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../lib/prisma";
 import { Grid, List, ListItem, ListItemText } from "@mui/material";
-
-const prisma = new PrismaClient();
 
 const index = ({ films }) => {
     return (
