@@ -1,30 +1,11 @@
 import { Grid, Typography } from "@mui/material";
-import { useState } from "react";
 import Poll from "../components/Poll";
 
-const index = () => {
-    const [polls, setPolls] = useState([
-        {
-            film1: {
-                title: "Film1",
-                votes: 10,
-            },
-            film2: {
-                title: "Film 2",
-                votes: 4,
-            },
-        },
-        {
-            film1: {
-                title: "Pappero",
-                votes: 71,
-            },
-            film2: {
-                title: "Rantor",
-                votes: 93,
-            },
-        },
-    ]);
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+
+const index = ({ polls }) => {
     return (
         <Grid
             container
@@ -47,4 +28,15 @@ const index = () => {
     );
 };
 
+export const getServerSideProps = async ({ req }) => {
+    const polls = await prisma.poll.findMany({
+        include: {
+            film1: true,
+            film2: true,
+        },
+    });
+    await prisma.$disconnect();
+
+    return { props: { polls } };
+};
 export default index;

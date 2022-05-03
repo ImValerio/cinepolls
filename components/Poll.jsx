@@ -1,6 +1,19 @@
 import { Grid, Button, Typography } from "@mui/material";
 
 const Poll = ({ poll }) => {
+    const sendVote = async (film) => {
+        const res = await fetch(`api/poll/vote`, {
+            method: "POST",
+            headers: {
+                "Content-type": "Application/json",
+            },
+            body: JSON.stringify({ film }),
+        });
+
+        const data = await res.json();
+
+        console.log(data);
+    };
     return (
         <Grid
             container
@@ -17,7 +30,12 @@ const Poll = ({ poll }) => {
                 item
                 xs={6}
             >
-                <Typography variant="h2" component="h2">
+                <Typography
+                    variant={poll.film1.title.length > 8 ? "h3" : "h2"}
+                    component="h2"
+                    textAlign="center"
+                    fontWeight={100}
+                >
                     {poll.film1.title}
                 </Typography>
                 <Typography variant="h6" component="h4">
@@ -37,7 +55,12 @@ const Poll = ({ poll }) => {
                 item
                 xs={6}
             >
-                <Typography variant="h2" component="h2">
+                <Typography
+                    variant={poll.film1.title.length > 8 ? "h3" : "h2"}
+                    component="h2"
+                    textAlign="center"
+                    fontWeight={100}
+                >
                     {poll.film2.title}
                 </Typography>
                 <Typography variant="h6" component="h4">
