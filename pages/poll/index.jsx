@@ -1,5 +1,5 @@
 import React from "react";
-import prisma from "../lib/prisma";
+import prisma from "../../lib/prisma";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
