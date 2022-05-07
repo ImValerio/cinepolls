@@ -58,7 +58,13 @@ const index = ({ polls }) => {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <Button variant="contained" onClick={() => router.push("/")}>
+            <Button
+                variant="contained"
+                sx={{
+                    margin: 3,
+                }}
+                onClick={() => router.push("/")}
+            >
                 HOME
             </Button>
         </>

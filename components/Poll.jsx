@@ -1,18 +1,26 @@
 import { Grid, Button, Typography } from "@mui/material";
+import { useState } from "react";
 
 const Poll = ({ poll }) => {
-    const sendVote = async (film) => {
+    const [votesFilm1, setVotesFilm1] = useState("?");
+    const [votesFilm2, setVotesFilm2] = useState("?");
+    const [voted, setVoted] = useState(false);
+
+    const voteFilm = async (film) => {
+        setVoted(true);
         const res = await fetch(`api/poll/vote`, {
             method: "POST",
             headers: {
                 "Content-type": "Application/json",
             },
-            body: JSON.stringify({ film }),
+            body: JSON.stringify({ film, pollId: poll.id }),
         });
 
-        const data = await res.json();
+        const { votesFilm1: votes1Updated, votesFilm2: votes2Updated } =
+            await res.json();
 
-        console.log(data);
+        setVotesFilm1(votes1Updated);
+        setVotesFilm2(votes2Updated);
     };
     return (
         <Grid
@@ -39,12 +47,19 @@ const Poll = ({ poll }) => {
                     {poll.film1.title}
                 </Typography>
                 <Typography variant="h6" component="h4">
-                    ({poll.film1.votes})
+                    ({votesFilm1})
                 </Typography>
 
-                <Button variant="contained" size="large" sx={{ margin: 3 }}>
-                    VOTE
-                </Button>
+                {!voted && (
+                    <Button
+                        variant="contained"
+                        size="large"
+                        sx={{ margin: 3 }}
+                        onClick={(e) => voteFilm(1)}
+                    >
+                        VOTE
+                    </Button>
+                )}
             </Grid>
 
             <Grid
@@ -64,12 +79,19 @@ const Poll = ({ poll }) => {
                     {poll.film2.title}
                 </Typography>
                 <Typography variant="h6" component="h4">
-                    ({poll.film2.votes})
+                    ({votesFilm2})
                 </Typography>
 
-                <Button variant="contained" size="large" sx={{ margin: 3 }}>
-                    VOTE
-                </Button>
+                {!voted && (
+                    <Button
+                        variant="contained"
+                        size="large"
+                        sx={{ margin: 3 }}
+                        onClick={() => voteFilm(2)}
+                    >
+                        VOTE
+                    </Button>
+                )}
             </Grid>
         </Grid>
     );

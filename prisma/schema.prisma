@@ -11,20 +11,18 @@ datasource db {
 }
 
 model Poll {
-  id Int @id @default(autoincrement())
-
-  film1Id Int
-  film2Id Int
-  film1   Film @relation("film1", fields: [film1Id], references: [id])
-  film2   Film @relation("film2", fields: [film2Id], references: [id])
+  id         Int  @id @default(autoincrement())
+  film1Id    Int
+  film2Id    Int
+  votesFilm1 Int  @default(0)
+  votesFilm2 Int  @default(0)
+  film1      Film @relation("film1", fields: [film1Id], references: [id])
+  film2      Film @relation("film2", fields: [film2Id], references: [id])
 }
 
 model Film {
-  id    Int    @id @default(autoincrement())
-  title String
-  votes Int
-
+  id          Int    @id @default(autoincrement())
+  title       String
   pollAsFilm1 Poll[] @relation("film1")
-
   pollAsFilm2 Poll[] @relation("film2")
 }
