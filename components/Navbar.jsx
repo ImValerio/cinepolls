@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { Grid, Typography } from "@mui/material";
+import { Avatar, Grid, Typography } from "@mui/material";
 
 export const Navbar = () => {
     const { data: session } = useSession();
@@ -29,15 +29,22 @@ export const Navbar = () => {
                     container
                     justifyContent="space-around"
                     alignItems="center"
+                    flexDirection="row"
                 >
-                    <Typography
-                        variant="h5"
-                        component="a"
-                        fontWeight="400"
-                        marginX={1}
-                    >
-                        Hello, {session.user.name}
-                    </Typography>
+                    <div className="d-flex justify-center items-center">
+                        <Avatar
+                            alt="User image profile"
+                            src={session.user.image}
+                        />
+                        <Typography
+                            variant="h5"
+                            component="a"
+                            fontWeight="400"
+                            marginX={1}
+                        >
+                            {session.user.name}
+                        </Typography>
+                    </div>
                     <Link
                         href="/api/auth/signout"
                         onClick={(e) => {

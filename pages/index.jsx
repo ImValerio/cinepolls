@@ -1,5 +1,6 @@
 import { Grid, Typography } from "@mui/material";
 import { useSession } from "next-auth/react";
+import Loading from "../components/Loading";
 import { Navbar } from "../components/Navbar";
 import Poll from "../components/Poll";
 import prisma from "../lib/prisma";
@@ -7,7 +8,7 @@ import prisma from "../lib/prisma";
 const index = ({ polls }) => {
     const { data, status } = useSession();
 
-    if (status === "loading") return <h1>Loading...</h1>;
+    if (status === "loading") return <Loading />;
     return (
         <Grid
             container
