@@ -28,8 +28,6 @@ const index = ({ polls }) => {
             {polls.map((e, i) => {
                 return <Poll poll={e} key={i} />;
             })}
-
-            {JSON.stringify(data, 0, 2)}
         </Grid>
     );
 };

@@ -36,7 +36,7 @@ const Poll = ({ poll }) => {
                 alignItems="center"
                 justifyContent="center"
                 item
-                xs={6}
+                xs={5}
             >
                 <Typography
                     variant={poll.film1.title.length > 8 ? "h4" : "h2"}
@@ -61,14 +61,25 @@ const Poll = ({ poll }) => {
                     </Button>
                 )}
             </Grid>
-
             <Grid
                 container
                 direction="row"
                 alignItems="center"
                 justifyContent="center"
                 item
-                xs={6}
+                xs={2}
+            >
+                <Typography variant="h6" component="h4">
+                    vs
+                </Typography>
+            </Grid>
+            <Grid
+                container
+                direction="row"
+                alignItems="center"
+                justifyContent="center"
+                item
+                xs={5}
             >
                 <Typography
                     variant={poll.film1.title.length > 8 ? "h3" : "h2"}
