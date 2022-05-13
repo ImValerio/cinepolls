@@ -1,7 +1,7 @@
 import { Grid, Button, Typography } from "@mui/material";
 import { useState } from "react";
 
-const Poll = ({ poll }) => {
+const Poll = ({ poll, email }) => {
     const [votesFilm1, setVotesFilm1] = useState("?");
     const [votesFilm2, setVotesFilm2] = useState("?");
     const [voted, setVoted] = useState(false);
@@ -13,7 +13,7 @@ const Poll = ({ poll }) => {
             headers: {
                 "Content-type": "Application/json",
             },
-            body: JSON.stringify({ film, pollId: poll.id }),
+            body: JSON.stringify({ film, pollId: poll.id, email }),
         });
 
         const { votesFilm1: votes1Updated, votesFilm2: votes2Updated } =

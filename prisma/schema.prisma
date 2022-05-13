@@ -46,6 +46,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  Vote          Vote[]
 }
 
 model VerificationToken {
@@ -56,14 +57,24 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+model Vote {
+  id        Int    @id @default(autoincrement())
+  userEmail String
+  user      User   @relation(fields: [userEmail], references: [email])
+  pollId    Int
+  poll      Poll   @relation(fields: [pollId], references: [id])
+
+}
+
 model Poll {
-  id         Int  @id @default(autoincrement())
+  id         Int    @id @default(autoincrement())
   film1Id    Int
   film2Id    Int
-  votesFilm1 Int  @default(0)
-  votesFilm2 Int  @default(0)
-  film1      Film @relation("film1", fields: [film1Id], references: [id])
-  film2      Film @relation("film2", fields: [film2Id], references: [id])
+  votesFilm1 Int    @default(0)
+  votesFilm2 Int    @default(0)
+  film1      Film   @relation("film1", fields: [film1Id], references: [id])
+  film2      Film   @relation("film2", fields: [film2Id], references: [id])
+  Vote       Vote[]
 }
 
 model Film {

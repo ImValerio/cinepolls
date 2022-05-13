@@ -27,7 +27,7 @@ const index = ({ polls }) => {
                 CinePolls
             </Typography>
             {polls.map((e, i) => {
-                return <Poll poll={e} key={i} />;
+                return <Poll poll={e} key={i} email={data.user.email} />;
             })}
 
             {JSON.stringify(data, 0, 2)}
