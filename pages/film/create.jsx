@@ -6,7 +6,6 @@ const create = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const res = await fetch("../api/film/create", {
             method: "POST",
             headers: {
@@ -16,11 +15,12 @@ const create = () => {
             body: JSON.stringify({ title }),
         });
 
+        setTitle("");
         if (res.ok) return alert("The movie has been added");
     };
     return (
         <Grid container justifyContent={"center"} alignItems="center">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="m-1">
                 <Grid
                     container
                     flexDirection={"column"}

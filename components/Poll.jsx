@@ -69,7 +69,7 @@ const Poll = ({ poll }) => {
                 item
                 xs={2}
             >
-                <Typography variant="h6" component="h4">
+                <Typography variant="h3" component="h4">
                     vs
                 </Typography>
             </Grid>

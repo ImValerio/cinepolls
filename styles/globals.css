@@ -32,6 +32,10 @@ html,body,#__next{
     width: 80%;
 }
 
+.m-1{
+    margin: 1em;
+}
+
 .mx-1 {
     margin-left: 1em;
     margin-right: 1em;

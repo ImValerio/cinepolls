@@ -9,7 +9,6 @@ export default async (req, res) => {
         const createdFilm = await prisma.film.create({
             data: {
                 title,
-                votes: 0
             }
         })
         await prisma.$disconnect()

@@ -62,7 +62,7 @@ const create = () => {
 
     return (
         <Grid container justifyContent={"center"} alignItems="center" fullWidth>
-            <form className="w-full" onSubmit={handleSubmit}>
+            <form className="w-full m-1" onSubmit={handleSubmit}>
                 <FormControl fullWidth>
                     <InputLabel id="film1"> Film 1</InputLabel>
 
