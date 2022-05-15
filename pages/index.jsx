@@ -6,7 +6,8 @@ import { Navbar } from "../components/Navbar";
 import Poll from "../components/Poll";
 import prisma from "../lib/prisma";
 
-const index = ({ polls }) => {
+const index = ({ allPolls }) => {
+    const [polls, setPolls] = useState(allPolls);
     const { data, status } = useSession();
     const [pollsHistory, setPollsHistory] = useState();
 
@@ -20,9 +21,10 @@ const index = ({ polls }) => {
                 body: JSON.stringify({ email: data.user.email }),
             });
 
-            const pollsH = await res.json();
-            console.log(pollsH);
-            setPollsHistory(pollsH.polls);
+            const { polls: pollsH } = await res.json();
+            setPollsHistory(pollsH);
+
+            setPolls(polls.filter((e) => !pollsH.includes(e.id)));
         };
         if (status == "authenticated") {
             getPollsHistory();
@@ -57,7 +59,7 @@ const index = ({ polls }) => {
 };
 
 export const getServerSideProps = async ({ req }) => {
-    const polls = await prisma.poll.findMany({
+    const allPolls = await prisma.poll.findMany({
         include: {
             film1: true,
             film2: true,
@@ -66,6 +68,6 @@ export const getServerSideProps = async ({ req }) => {
 
     await prisma.$disconnect();
 
-    return { props: { polls } };
+    return { props: { allPolls } };
 };
 export default index;
