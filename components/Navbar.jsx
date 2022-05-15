@@ -29,6 +29,7 @@ export const Navbar = () => {
                     container
                     justifyContent="space-around"
                     alignItems="center"
+                    flexDirection="row"
                 >
                     <div className="d-flex justify-center items-center">
                         <Avatar
