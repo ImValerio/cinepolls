@@ -5,10 +5,12 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 import { SessionProvider } from "next-auth/react"
+import { Navbar } from '../components/Navbar';
 
 function MyApp({ Component, pageProps }) {
   return (
     <SessionProvider>
+      <Navbar />
       <Component {...pageProps} />
     </SessionProvider>
   )

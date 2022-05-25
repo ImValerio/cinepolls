@@ -2,18 +2,16 @@ import { Grid, Typography } from "@mui/material";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Loading from "../components/Loading";
-import { Navbar } from "../components/Navbar";
 import Poll from "../components/Poll";
 import prisma from "../lib/prisma";
 
 const index = ({ allPolls }) => {
-    const [polls, setPolls] = useState(allPolls);
+    const [polls, setPolls] = useState();
     const { data, status } = useSession();
-    const [pollsHistory, setPollsHistory] = useState();
 
     useEffect(() => {
         const getPollsHistory = async () => {
-            const res = await fetch(`/api/poll/getUserPolls`, {
+            const res = await fetch(`/api/poll/getUserVotes`, {
                 method: "POST",
                 headers: {
                     "Content-type": "Application/json",
@@ -21,17 +19,17 @@ const index = ({ allPolls }) => {
                 body: JSON.stringify({ email: data.user.email }),
             });
 
-            const { polls: pollsH } = await res.json();
-            setPollsHistory(pollsH);
+            const { pollsId } = await res.json();
 
-            setPolls(polls.filter((e) => !pollsH.includes(e.id)));
+            setPolls(allPolls.filter((e) => !pollsId.includes(e.id)));
         };
         if (status == "authenticated") {
             getPollsHistory();
         }
     }, [data]);
 
-    if (status === "loading") return <Loading />;
+    if (status === "loading" || !polls) return <Loading />;
+
     return (
         <Grid
             container
@@ -40,7 +38,6 @@ const index = ({ allPolls }) => {
             alignItems="center"
             margin={0}
         >
-            <Navbar />
             <Typography
                 variant="h1"
                 component="h1"
