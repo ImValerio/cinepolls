@@ -6,7 +6,7 @@ import Poll from "../components/Poll";
 import prisma from "../lib/prisma";
 
 const index = ({ allPolls }) => {
-    const [polls, setPolls] = useState(allPolls);
+    const [polls, setPolls] = useState();
     const { data, status } = useSession();
 
     useEffect(() => {
@@ -21,14 +21,14 @@ const index = ({ allPolls }) => {
 
             const { pollsId } = await res.json();
 
-            setPolls(polls.filter((e) => !pollsId.includes(e.id)));
+            setPolls(allPolls.filter((e) => !pollsId.includes(e.id)));
         };
         if (status == "authenticated") {
             getPollsHistory();
         }
     }, [data]);
 
-    if (status === "loading") return <Loading />;
+    if (status === "loading" || !polls) return <Loading />;
 
     return (
         <Grid
